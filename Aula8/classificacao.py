@@ -64,3 +64,13 @@ for nome,modelo in modelos.items():
       'Recall': recall_score(y_test,y_prev),
       'F1-Score': f1_score(y_test,y_prev)
   })
+
+df_resultados = pd.DataFrame(resultados)
+df_resultados['Score_Combinado'] = (
+    0 * df_resultados['Acurácia'] +
+    0.25 * df_resultados['Precisão'] +
+    0.5 * df_resultados['Recall'] +
+    0.25 * df_resultados['F1-Score'] )
+
+df_resultados_ordenado = df_resultados.sort_values(by='Score_Combinado',ascending=False).reset_index(drop=True)
+df_resultados_ordenado
